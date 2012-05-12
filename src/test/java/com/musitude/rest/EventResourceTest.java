@@ -55,4 +55,31 @@ public class EventResourceTest extends RestTestSupport {
         }
         
     }
+
+    @Test
+    public void testCheckIn() throws Exception {
+        // Given
+        WebResource eventPath = resource().path("event").path("1");
+        WebResource path = eventPath.path("some_device");
+        
+        // when
+        path.post();
+        
+        // then
+        assertThat(eventPath.get(String.class)).contains("guests\":1");
+    }
+    
+    @Test
+    public void testLike() throws Exception {
+        // Given
+        WebResource eventPath = resource().path("event").path("1");
+        WebResource path = eventPath.path("some_device_likes");
+        
+        // when
+        path.post();
+        path.path("!").put();
+        
+        // then
+        assertThat(eventPath.get(String.class)).contains("likes\":1");
+    }
 }
