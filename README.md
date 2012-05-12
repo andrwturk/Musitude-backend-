@@ -1,2 +1,2 @@
-Musitude-backend-
+Musitude-backend
 =================
