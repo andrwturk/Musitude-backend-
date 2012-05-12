@@ -8,6 +8,7 @@
     <properties>
         <jersey.version>1.7</jersey.version>
         <hibernate.version>3.5.6-Final</hibernate.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
     <name>musitude-server Maven Webapp</name>
     <url>http://maven.apache.org</url>
