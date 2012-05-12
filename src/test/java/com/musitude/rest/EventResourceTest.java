@@ -18,8 +18,7 @@ public class EventResourceTest extends RestTestSupport {
     public void testEventsFound() throws Exception {
         // Givan
         WebResource resource = resource();
-        String span = "{\"latitude\": 50.449566, \"longitude\": 30.458887, \"latitudeSpan\": 1, \"longitudeSpan\": 1}";
-        WebResource path = resource.path("event").queryParam("area", span);
+        WebResource path = resource.path("event");
         
         // When
         String events = path.get(String.class);
@@ -27,18 +26,15 @@ public class EventResourceTest extends RestTestSupport {
         // Then
         assertThat(events).startsWith("[{");
     }
-    
+
     @Test
-    public void testEventsNotFound() throws Exception {
-        // Givan
-        WebResource resource = resource();
-        String span = "{\"latitude\": 50.449566, \"longitude\": 30.458887, \"latitudeSpan\": 0.001, \"longitudeSpan\": 1}";
-        WebResource path = resource.path("event").queryParam("area", span);
-        
+    public void testGetEvent() throws Exception {
+        // Given
+        WebResource resource = resource().path("event").path("1");
         // When
-        String events = path.get(String.class);
+        String event = resource.get(String.class);
         
         // Then
-        assertThat(events).isEqualTo("[]"); // Nothing found
+        assertThat(event).contains("\"id\":1");
     }
 }
