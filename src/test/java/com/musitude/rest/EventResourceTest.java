@@ -1,9 +1,11 @@
 package com.musitude.rest;
 
+import com.sun.jersey.api.client.UniformInterfaceException;
 import com.sun.jersey.api.client.WebResource;
 import org.testng.annotations.Test;
 
 import static org.fest.assertions.Assertions.assertThat;
+import static org.fest.assertions.Fail.fail;
 
 /**
  * Author: Iurii Lytvynenko
@@ -36,5 +38,21 @@ public class EventResourceTest extends RestTestSupport {
         
         // Then
         assertThat(event).contains("\"id\":1");
+    }
+    
+    @Test
+    public void testGetNonExistingEvent() throws Exception {
+        // Given
+        WebResource resource = resource().path("event").path("100");
+        // When
+        try {
+
+            resource.get(String.class);
+            fail();
+        } catch (UniformInterfaceException e) {
+            // Then
+            assertThat(e.getResponse().getStatus()).isEqualTo(404);
+        }
+        
     }
 }

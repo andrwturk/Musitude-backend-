@@ -1,9 +1,10 @@
 package com.musitude.model;
 
-import javax.persistence.Column;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 /**
  * Author: Iurii Lytvynenko
@@ -12,14 +13,12 @@ import javax.persistence.Id;
 public class Event {
     @Id @GeneratedValue
     private long id;
-    @Column
-    private double latitude;
-    @Column
-    private double longitude;
 
-    public Event(double latitude, double longitude) {
-        this.latitude = latitude;
-        this.longitude = longitude;
+    @ManyToOne(cascade = CascadeType.MERGE)
+    private Venue venue;
+    
+    public Event(Venue venue) {
+        this.venue = venue;
     }
 
     public Event() {
@@ -29,11 +28,11 @@ public class Event {
         return id;
     }
 
-    public double getLatitude() {
-        return latitude;
+    public Venue getVenue() {
+        return venue;
     }
 
-    public double getLongitude() {
-        return longitude;
+    public void setVenue(Venue venue) {
+        this.venue = venue;
     }
 }
