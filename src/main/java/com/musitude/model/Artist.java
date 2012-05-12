@@ -6,7 +6,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 /**
- * TODO: Document me
  * Author: Iurii Lytvynenko
  */
 @Entity
@@ -16,7 +15,7 @@ public class Artist {
     
     @Column
     private String name;
-
+    
     public Artist() {
     }
 

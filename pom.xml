@@ -96,12 +96,15 @@
     </dependencies>
     
     <build>
-        <finalName>musitude-server</finalName>
+        <finalName>ROOT</finalName>
         <plugins>
             <plugin>
                 <groupId>org.mortbay.jetty</groupId>
                 <artifactId>maven-jetty-plugin</artifactId>
                 <version>6.1.26</version>
+                <configuration>
+                    <contextPath>/</contextPath>
+                </configuration>
             </plugin>
         </plugins>
     </build>
