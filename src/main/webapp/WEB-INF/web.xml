@@ -5,7 +5,7 @@
 <web-app>
     <display-name>Musitude server</display-name>
     <listener>
-        <listener-class>com.musitude.test_data.DataGenerationListener</listener-class>
+        <listener-class>com.musitude.MusitudeContextListener</listener-class>
     </listener>
 
     <servlet>
