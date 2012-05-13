@@ -96,7 +96,7 @@
     </dependencies>
     
     <build>
-        <finalName>ROOT</finalName>
+        <finalName>musitude-server</finalName>
         <plugins>
             <plugin>
                 <groupId>org.mortbay.jetty</groupId>
