@@ -21,6 +21,8 @@ public class DataGenerator {
     public void generateData() {
         EntityManager em = EM.get();
         try {
+            if (hasData(em))
+                return;
             em.getTransaction().begin();
             // Venues
             Venue dno = new Venue("DNO bit-cafe", 50.453842721468185, 30.44959545135498);
@@ -47,5 +49,9 @@ public class DataGenerator {
             em.close();
         }
 
+    }
+
+    private boolean hasData(EntityManager em) {
+        return em.find(Event.class, 1l) != null;
     }
 }
