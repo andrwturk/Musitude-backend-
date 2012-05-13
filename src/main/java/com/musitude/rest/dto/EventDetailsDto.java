@@ -4,29 +4,26 @@ import com.musitude.model.CheckIn;
 import com.musitude.model.Event;
 import com.musitude.model.Event.Status;
 
-import java.util.Date;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 
 /**
  * Author: Iurii Lytvynenko
  */
 public class EventDetailsDto {
-
-    public String getAction() {
-        return action;
-    }
-
+    private static final DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm");
     private long id;
+
     private long venueId;
     private long artistId;
     private String venueName;
     private String artistName;
-    private Date startDate;
-    private Date endDate;
+    private String startDate;
+    private String endDate;
     private Status status;
-    
     private int guests;
+
     private int likes;
-    
     private String action;
 
     public EventDetailsDto(Event event, String action) {
@@ -35,8 +32,8 @@ public class EventDetailsDto {
         this.venueName = event.getVenue().getName();
         this.artistId = event.getArtist().getId();
         this.artistName = event.getArtist().getName();
-        this.startDate = event.getStartDate();
-        this.endDate = event.getEndDate();
+        this.startDate = df.format(event.getStartDate());
+        this.endDate = df.format(event.getEndDate());
         this.status = event.getStatus();
         this.action = action;
         calcGuestsAndLikes(event);
@@ -71,11 +68,11 @@ public class EventDetailsDto {
         return artistName;
     }
 
-    public Date getStartDate() {
+    public String getStartDate() {
         return startDate;
     }
 
-    public Date getEndDate() {
+    public String getEndDate() {
         return endDate;
     }
 
@@ -89,6 +86,10 @@ public class EventDetailsDto {
 
     public Status getStatus() {
         return status;
+    }
+
+    public String getAction() {
+        return action;
     }
 }
 
