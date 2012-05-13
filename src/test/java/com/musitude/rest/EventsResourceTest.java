@@ -14,7 +14,7 @@ import static org.fest.assertions.Fail.fail;
  * DNO bit-cafe: 50.453842721468185, 30.44959545135498
  * Ishvara Joga center: 50.45083,30.451078
  */
-public class EventResourceTest extends RestTestSupport {
+public class EventsResourceTest extends RestTestSupport {
 
     @Test
     public void testEventsFound() throws Exception {

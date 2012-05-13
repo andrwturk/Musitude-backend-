@@ -3,7 +3,7 @@ package com.musitude.test_data;
 import com.musitude.jpa.EM;
 import com.musitude.model.Artist;
 import com.musitude.model.CheckIn;
-import com.musitude.model.CheckIn.Mood;
+import com.musitude.model.CheckIn.Status;
 import com.musitude.model.Event;
 import com.musitude.model.Venue;
 
@@ -39,7 +39,7 @@ public class DataGenerator {
                                         format.parse("2012-05-19 23:00"));
             yogaEvent.getCheckIns().add(new CheckIn("device1", yogaEvent));
             CheckIn like = new CheckIn("device2", yogaEvent);
-            like.setMood(Mood.LIKE);
+            like.setStatus(Status.LIKED);
             yogaEvent.getCheckIns().add(like);
             em.merge(yogaEvent);
             em.getTransaction().commit();

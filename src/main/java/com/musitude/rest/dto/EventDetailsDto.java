@@ -1,8 +1,8 @@
 package com.musitude.rest.dto;
 
 import com.musitude.model.CheckIn;
-import com.musitude.model.CheckIn.Mood;
 import com.musitude.model.Event;
+import com.musitude.model.Event.Status;
 
 import java.util.Date;
 
@@ -10,9 +10,11 @@ import java.util.Date;
  * Author: Iurii Lytvynenko
  */
 public class EventDetailsDto {
-    public enum Status {
-        FUTURE, ACTIVE, PAST
+
+    public String getAction() {
+        return action;
     }
+
     private long id;
     private long venueId;
     private long artistId;
@@ -24,8 +26,10 @@ public class EventDetailsDto {
     
     private int guests;
     private int likes;
+    
+    private String action;
 
-    public EventDetailsDto(Event event) {
+    public EventDetailsDto(Event event, String action) {
         this.id = event.getId();
         this.venueId = event.getVenue().getId();
         this.venueName = event.getVenue().getName();
@@ -33,20 +37,18 @@ public class EventDetailsDto {
         this.artistName = event.getArtist().getName();
         this.startDate = event.getStartDate();
         this.endDate = event.getEndDate();
+        this.status = event.getStatus();
+        this.action = action;
+        calcGuestsAndLikes(event);
+    }
+
+    private void calcGuestsAndLikes(Event event) {
         guests = event.getCheckIns().size();
         likes = 0;
         for (CheckIn check : event.getCheckIns()) {
-            if (check.getMood() == Mood.LIKE)
+            if (check.getStatus() == CheckIn.Status.LIKED)
                 likes++;
         }
-
-        Date current = new Date();
-        if (startDate.after(current))
-            status = Status.FUTURE;
-        else if (endDate.after(current))
-            status = Status.ACTIVE;
-        else 
-            status = Status.PAST;
     }
 
     public long getId() {

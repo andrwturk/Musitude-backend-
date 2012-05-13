@@ -12,8 +12,8 @@ import javax.persistence.ManyToOne;
  */
 @Entity
 public class CheckIn {
-    public enum Mood {
-        LIKE, DISLIKE
+    public enum Status {
+        WILL_GO, CHECKED_IN, LIKED
     }
     
     @Id @GeneratedValue
@@ -23,7 +23,7 @@ public class CheckIn {
     private String deviceId;
     
     @Column
-    private Mood mood;
+    private Status status;
 
     @ManyToOne
     private Event event;
@@ -34,17 +34,18 @@ public class CheckIn {
     public CheckIn(String deviceId, Event event) {
         this.deviceId = deviceId;
         this.event = event;
+        this.status = Status.WILL_GO;
     }
 
     public String getDeviceId() {
         return deviceId;
     }
 
-    public Mood getMood() {
-        return mood;
+    public Status getStatus() {
+        return status;
     }
 
-    public void setMood(Mood mood) {
-        this.mood = mood;
+    public void setStatus(Status status) {
+        this.status = status;
     }
 }

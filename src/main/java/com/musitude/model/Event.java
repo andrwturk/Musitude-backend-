@@ -17,24 +17,28 @@ import java.util.Set;
  */
 @Entity
 public class Event {
+    public enum Status {
+        FUTURE, ACTIVE, PAST
+    }
+
     @Id @GeneratedValue
     private long id;
 
     @ManyToOne(cascade = CascadeType.MERGE)
     private Venue venue;
-    
+
     @ManyToOne(cascade = CascadeType.MERGE)
     private Artist artist;
-    
+
     @Temporal(TemporalType.TIMESTAMP)
     private Date startDate;
-    
+
     @Temporal(TemporalType.TIMESTAMP)
     private Date endDate;
-    
+
     @OneToMany(mappedBy = "event", cascade = CascadeType.MERGE)
     private Set<CheckIn> checkIns;
-    
+
     public Event(Venue venue, Artist artist, Date startDate, Date endDate) {
         this.venue = venue;
         this.artist = artist;
@@ -75,4 +79,19 @@ public class Event {
         }
         return checkIns;
     }
+
+    public Status getStatus() {
+        Date current = new Date();
+        if (startDate.after(current))
+            return Status.FUTURE;
+        else if (endDate.after(current))
+            return Status.ACTIVE;
+        else
+            return Status.PAST;
+    }
+    
+    public  boolean isActive() {
+        return getStatus() == Status.ACTIVE;
+    }
+
 }
