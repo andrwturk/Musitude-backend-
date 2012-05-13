@@ -39,6 +39,13 @@
 
             <property name="hibernate.show_sql" value="false" />
             <property name="hibernate.hbm2ddl.auto" value="update" />
+            
+            <property name="c3p0.acquire_increment" value="1"/> 
+            <property name="c3p0.idle_test_period" value="100"/> 
+            <property name="c3p0.max_size" value="100"/> 
+            <property name="c3p0.max_statements" value="0"/> 
+            <property name="c3p0.min_size" value="10"/> 
+            <property name="c3p0.timeout" value="100"/> 
         </properties>
 
     </persistence-unit>
