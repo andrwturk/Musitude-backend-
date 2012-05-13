@@ -15,8 +15,8 @@ public class EventDetailsDto {
     }
     private long id;
     private long venueId;
-    private String venueName;
     private long artistId;
+    private String venueName;
     private String artistName;
     private Date startDate;
     private Date endDate;

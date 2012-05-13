@@ -9,11 +9,15 @@ public class EventListDto {
     private long id;
     private double latitude;
     private double longitude;
+    private String venueName;
+    private String artistName;
 
     public EventListDto(Event event) {
         this.id = event.getId();
         this.latitude = event.getVenue().getLatitude();
         this.longitude = event.getVenue().getLongitude();
+        this.venueName = event.getVenue().getName();
+        this.artistName = event.getArtist().getName();
     }
 
     public long getId() {
@@ -39,5 +43,12 @@ public class EventListDto {
     public void setLongitude(double longitude) {
         this.longitude = longitude;
     }
-    
+
+    public String getVenueName() {
+        return venueName;
+    }
+
+    public String getArtistName() {
+        return artistName;
+    }
 }
